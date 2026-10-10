@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ILAW LP by J.L.D.P</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <img src="assets/logo.svg" alt="ILAW LP" class="logo">
+        <div class="hero-copy">
+          <h1>Plan a lesson in the official ILAW layout</h1>
+          <p>Detailed, session by session: minute-by-minute flow, real questions with answers, worksheets, slide outlines, and a declaration of AI use. You stay in charge; the AI drafts, you decide.</p>
+        </div>
+      </div>
+      <ol class="stepper" aria-label="Progress">
+        <li class="step active"><span>1</span> Connect</li>
+        <li class="step"><span>2</span> Plan</li>
+        <li class="step"><span>3</span> Review</li>
+        <li class="step"><span>4</span> Download</li>
+      </ol>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- 1. Connect -->
+    <section class="card" id="sec-connect">
+      <div class="card-head"><span class="icon">🔑</span><div><h2>1. Connect an AI (optional)</h2><p class="muted">Google Gemini is recommended. Other providers are listed too, so pick the one you have a key for. You can also skip AI and use the template.</p></div></div>
+      <div class="grid2">
+        <label class="field">Provider
+          <select id="provider"></select>
+        </label>
+        <label class="field">Model
+          <select id="modelSelect"></select>
+        </label>
+        <label class="field span2" id="modelCustomWrap" hidden>Model name (exact, from your provider)
+          <input id="modelCustom" type="text" placeholder="Type the model name">
+        </label>
+        <label class="field span2">Base URL (filled for you)
+          <input id="baseUrl" type="text">
+        </label>
+        <label class="field span2">API key
+          <input id="apiKey" type="password" autocomplete="off" placeholder="Paste your key">
+        </label>
+      </div>
+      <p id="keyHelp" class="muted small"></p>
+      <p id="estimate" class="muted small"></p>
+        <div class="row-actions">
+        <button id="btnCheckModels" type="button" class="btn secondary">Find working models</button>
+        <button id="btnTest" type="button" class="btn ghost">Test the selected model</button>
+        <label class="check"><input id="showAllModels" type="checkbox"> Show all listed models (even untested)</label>
+      </div>
+      <p id="modelStatus" class="status small"></p>
+      <p id="testStatus" class="status small"></p>
+      <div class="remember">
+        <label class="check"><input id="rememberKey" type="checkbox"> Remember my key and model on this device</label>
+        <label class="check"><input id="rememberForm" type="checkbox"> Remember my lesson inputs</label>
+        <label class="check"><input id="rememberProfile" type="checkbox"> Remember my name and school</label>
+        <button id="btnForget" type="button" class="link">Forget everything saved here</button>
+      </div>
+      <details class="explain">
+        <summary>How does this work? (plain words)</summary>
+        <p>An AI service is a company's computer that writes text when you send it a request. The API key is your personal password for that service. Most providers limit how many requests a key can make. This page sends requests straight from your browser to the provider; nothing is stored on any server. Keep learner names, grades, and personal details out of every AI tool.</p>
+      </details>
+    </section>
+
+    <!-- 2. Plan -->
+    <section class="card" id="sec-setup">
+      <div class="card-head"><span class="icon">📝</span><div><h2>2. Describe the lesson</h2><p class="muted">Required: teacher, school, subject, grade, sessions, competency, and a pattern. Everything else can be left blank for the AI.</p></div></div>
+
+      <div class="grid2">
+        <label class="field">Name of teacher/s
+          <input id="teachers" type="text" placeholder="Full name(s)">
+        </label>
+        <label class="field">School
+          <input id="school" type="text" placeholder="Name of school">
+        </label>
+        <label class="field">Schools Division (Word letterhead only; optional)
+          <input id="division" type="text" placeholder="e.g., Schools Division of Legazpi City">
+        </label>
+        <label class="field">School address (Word letterhead only; optional)
+          <input id="schoolAddress" type="text" placeholder="Street, barangay, city">
+        </label>
+        <label class="field">School email (Word letterhead only; optional)
+          <input id="schoolEmail" type="text" placeholder="school@example.com">
+        </label>
+        <label class="field">Name of lesson (optional)
+          <input id="lessonTitle" type="text" placeholder="e.g., Acids, Bases, and the pH Scale">
+        </label>
+        <label class="field">Learning area / subject
+          <input id="learningArea" type="text" list="subjects" placeholder="Any subject">
+          <datalist id="subjects">
+            <option value="General Science"><option value="Chemistry"><option value="Physics"><option value="Biology">
+            <option value="Earth Science"><option value="Practical Research"><option value="General Mathematics"><option value="English">
+            <option value="Filipino"><option value="Araling Panlipunan"><option value="MAPEH"><option value="TLE">
+          </datalist>
+        </label>
+        <label class="field">Grade level
+          <select id="gradeLevel"></select>
+        </label>
+        <label class="field">Section (optional)
+          <input id="section" type="text" placeholder="e.g., STEM A">
+        </label>
+        <label class="field">Number of sessions
+          <select id="sessions">
+            <option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option>
+          </select>
+        </label>
+        <label class="field">Term
+          <select id="term"></select>
+        </label>
+        <label class="field">Week (optional, any number)
+          <input id="week" type="number" min="1" placeholder="e.g., 4">
+        </label>
+        <label class="field">Medium of instruction
+          <select id="medium"><option>English</option><option>Filipino</option><option>Mixed</option></select>
+        </label>
+      </div>
+
+      <h3>Competency and standards</h3>
+      <div class="grid2">
+        <label class="field span2">Learning competency (required)
+          <textarea id="competency" rows="2" placeholder="Paste the competency from your curriculum guide or BOW"></textarea>
+        </label>
+        <label class="field">Content standard (optional)
+          <textarea id="contentStandard" rows="2"></textarea>
+        </label>
+        <label class="field">Performance standard (optional)
+          <textarea id="performanceStandard" rows="2"></textarea>
+        </label>
+        <label class="field span2">Learning objectives (optional)
+          <textarea id="objectives" rows="3" placeholder="Leave blank and the AI writes Knowledge, Skills, and Attitude objectives for each session. Or write your own, one per line."></textarea>
+        </label>
+      </div>
+
+      <h3>Learners</h3>
+      <p class="muted small">Pick what applies. The AI builds a contextualized learner profile from these, then tailors examples, groupings, scaffolds, and accommodations.</p>
+      <div id="ctxChips" class="chips"></div>
+      <div class="grid2">
+        <label class="field">Other (optional)
+          <input id="learnerContextOther" type="text">
+        </label>
+        <label class="field">Class size (optional)
+          <input id="classSize" type="number" min="1" max="60" placeholder="e.g., 30">
+        </label>
+        <label class="field span2">Your real observations (optional; makes the plan more tailored; if blank, nothing about learners is assumed)
+          <textarea id="observations" rows="3" placeholder="What did they do well recently? Where did they struggle? What interests them? Any barriers?"></textarea>
+        </label>
+      </div>
+
+      <h3>Lesson design pattern</h3>
+      <p class="muted small">Pick one or more. Choose "Let the AI decide" to let it pick from the roster and explain why.</p>
+      <div id="patternChips" class="chips"></div>
+      <label class="field">Other pattern (describe; needed only if you add one)
+        <input id="patternOther" type="text">
+      </label>
+
+      <h3>Reference material (optional)</h3>
+      <div class="upload">
+        <label class="file-btn">Upload .txt, .md, or .pdf
+          <input id="refFile" type="file" accept=".txt,.md,.csv,.pdf" multiple>
+        </label>
+        <button id="refClear" type="button" class="link">Clear</button>
+      </div>
+      <div id="refList"></div>
+      <label class="check" id="useWebRow" hidden><input id="useWeb" type="checkbox"> Let Gemini search the web for current, trustworthy sources (Gemini only; it lists the sources it used)</label>
+
+      <h3>Activities (optional)</h3>
+      <p class="muted small">Leave blank and the AI designs the core activity for that session, marked for your review.</p>
+      <div id="sessionActivities"></div>
+
+      <label class="field">Additional instructions (optional)
+        <textarea id="additional" rows="2" placeholder="Lab safety, IPEd, SPED, local context, language emphasis, and so on."></textarea>
+      </label>
+
+      <div class="row-actions big">
+        <button id="btnGenerate" type="button" class="btn primary">✨ Draft the detailed lesson plan with AI</button>
+        <button id="btnManual" type="button" class="btn secondary">📄 Build the template only (no AI)</button>
+      </div>
+      <ul id="errors" class="errors" hidden></ul>
+    </section>
+
+    <!-- 3. Review -->
+    <section class="card" id="sec-plan" hidden>
+      <div class="card-head"><span class="icon">🔍</span><div><h2>3. Review and adapt</h2><p class="muted">Every field is editable. Badges show what the AI drafted. Review and rewrite before you teach.</p></div>
+        <div class="seg">
+          <button id="viewOverview" type="button" class="seg-btn active">Overview (official layout)</button>
+          <button id="viewDetailed" type="button" class="seg-btn">Detailed sessions</button>
+        </div>
+      </div>
+      <div id="planView"></div>
+      <h3>Annex A self-check</h3>
+      <p class="muted small">Computed from your plan. It is a reflection tool, not a score.</p>
+      <div id="rubric"></div>
+    </section>
+
+    <!-- 4. Declaration -->
+    <section class="card" id="sec-decl" hidden>
+      <div class="card-head"><span class="icon">🪪</span><div><h2>4. Declaration of AI use</h2><p class="muted">Short, honest, and based on what the AI actually drafted.</p></div></div>
+      <label class="field">Anything you changed or rejected (optional)
+        <textarea id="declChanges" rows="2" placeholder="e.g., rewrote the session 2 flow; replaced the second activity"></textarea>
+      </label>
+      <div class="row-actions">
+        <button id="btnDeclAi" type="button" class="btn primary">Draft with AI (1 to 3 lines)</button>
+        <button id="btnDeclPlain" type="button" class="btn secondary">Use the built-in version</button>
+      </div>
+      <label class="field">Final declaration (editable)
+        <textarea id="declText" rows="4"></textarea>
+      </label>
+    </section>
+
+    <!-- 5. Download -->
+    <section class="card" id="sec-export" hidden>
+      <div class="card-head"><span class="icon">📥</span><div><h2>5. Download</h2><p class="muted">If a download does not start, use the link that appears under Downloads.</p></div></div>
+      <div class="row-actions big">
+        <button id="btnDocx" type="button" class="btn primary">Word (.docx)</button>
+        <button id="btnPdf" type="button" class="btn secondary">PDF (print view)</button>
+        <button id="btnCopy" type="button" class="btn secondary">Copy as text</button>
+        <button id="btnJson" type="button" class="btn ghost">Save JSON</button>
+        <label class="file-btn">Open saved JSON <input id="fileJson" type="file" accept="application/json"></label>
+      </div>
+      <div id="downloads" class="downloads" hidden><strong>Downloads:</strong></div>
+    </section>
+
+    <!-- 6. PowerPoint -->
+    <section class="card" id="sec-ppt" hidden>
+      <div class="card-head"><span class="icon">🎞️</span><div><h2>6. PowerPoint from this plan</h2><p class="muted">The slides are built on your device from this plan, so they add no AI requests. The file is a normal, editable PowerPoint. Photos come from Wikimedia Commons where a match is found.</p></div></div>
+      <div class="grid2">
+        <label class="field">Theme
+          <select id="pptTheme">
+            <option value="periwinkle" selected>Periwinkle (like the demo deck)</option>
+            <option value="lab-blue">Lab Blue</option>
+            <option value="forest">Forest Green</option>
+            <option value="sunrise">Sunrise</option>
+            <option value="violet">Violet Night</option>
+            <option value="mono">Clean Mono</option>
+          </select>
+        </label>
+        <label class="field">Opening question for the hook slide (optional)
+          <input id="pptHook" type="text" placeholder="e.g., Why does calamansi taste sour?">
+        </label>
+        <label class="check"><input id="pptRefs" type="checkbox" checked> References slide</label>
+        <label class="check"><input id="pptWays" type="checkbox" checked> Ways forward slide</label>
+        <label class="check"><input id="pptDecl" type="checkbox" checked> Declaration slide</label>
+      </div>
+      <div class="row-actions">
+        <button id="btnPpt" type="button" class="btn primary">Create the .pptx</button>
+        <span id="pptStatus" class="status small"></span>
+      </div>
+      <div id="slidePreview"></div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <strong>ILAW LP by J.L.D.P</strong>
+      <span>Website and generator design: John Lee D. Peñarubia (J.L.D.P).</span>
+      <span class="small">Based on DepEd Order No. 016, s. 2026 (ILAW) and DepEd Order No. 003, s. 2026 (AI use). Review every plan before use.</span>
+    </div>
+  </footer>
+
+  <div id="busy" class="busy" hidden>
+    <div class="busy-card">
+      <div class="spinner"></div>
+      <p id="busyText">Working…</p>
+      <div class="bar"><span id="busyBar"></span></div>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="vendor/docx.umd.js"></script>
+  <script src="vendor/pptxgen.bundle.js"></script>
+  <script src="vendor/pdf.min.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

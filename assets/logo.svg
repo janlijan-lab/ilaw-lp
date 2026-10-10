@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="80" viewBox="0 0 300 80" role="img" aria-label="ILAW LP logo">
+  <defs>
+    <linearGradient id="bulb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4B183"/>
+      <stop offset="1" stop-color="#FFD966"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1F4E79"/>
+      <stop offset="1" stop-color="#2E75B6"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="300" height="80" rx="14" fill="url(#panel)"/>
+  <g transform="translate(6,8)">
+    <path d="M32 0 L32 -6 M8 8 L3 3 M56 8 L61 3" stroke="#FFD966" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="32" cy="30" r="22" fill="url(#bulb)"/>
+    <rect x="22" y="48" width="20" height="8" rx="2" fill="#DDEBF7"/>
+    <rect x="24" y="56" width="16" height="5" rx="2" fill="#DDEBF7" opacity="0.8"/>
+  </g>
+  <text x="88" y="46" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="800" fill="#FFFFFF">ILAW</text>
+  <text x="203" y="46" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="300" fill="#FFD966">LP</text>
+  <text x="90" y="66" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#DDEBF7" letter-spacing="1.2">INTENTIONS · LEARNING EXPERIENCE · ASSESSING · WAYS FORWARD</text>
+</svg>
